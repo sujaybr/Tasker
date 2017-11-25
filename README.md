@@ -3,8 +3,8 @@ This is a simple python-Flask Application to create your own local to-do list, D
 
 
 ## To Run this Application
--Use `pip install -r requirements.txt` to install all required packages
--Use `python app.py` to run the Application
+- Use `pip install -r requirements.txt` to install all required packages
+- Use `python app.py` to run the Application
 
 
 ## Here are all the features the Application has to offer
