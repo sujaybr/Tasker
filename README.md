@@ -2,10 +2,6 @@
 This is a simple python-Flask Application to create your own local to-do list, Diary with tags and a simple Calendar.
 
 
-## Before you can use the app 
-You will have to create 3 files in the parent directory namely tasks.txt, dairy.txt and cal.txt to store you entries.
-
-
 ## To Run this Application
 Use `python app.py` to run the Application
 
