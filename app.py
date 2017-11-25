@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-
+	#----------------------YOU WILL HAVE TO CREATE tasks.txt, cal.txt and dairy.txt YOURSELF--------------------------
 	f = open("tasks.txt", "r")
 	cal = open("cal.txt", "r")
 	dia = open("dairy.txt", 'r')
