@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>!@</title>
+
+	<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../static/css/normalize.css">
+  <link rel="stylesheet" href="../static/css/skeleton.css">
+  <link rel="stylesheet" href="../static/css/middle.css">
+  
+<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+
+	<style>
+
+ button{
+    border-radius: 100px;
+  }
+	body{
+		background-color: #EEE;
+	}
+	h4:hover, h5:hover, h3:hover{
+		background-color: red;
+		font-weight: bold;
+		color: white;
+	}
+
+	h4, span{
+		margin:5px;
+		font-size: 20px;
+	}
+	p{
+		margin:5px;
+	}
+	h5{
+		font-size: 15px;
+	}
+	h3{
+		margin:5px;
+		font-size:25px;
+	}
+	span{
+		color:red;
+		font-weight: bold;
+	}
+
+	span2{
+		color:blue;
+		margin-left: 100px;
+	}
+
+	span3{
+		padding-left: 10px;
+		color:red;
+	}
+
+	.todo{
+		background-color: #EEE;
+		border: 10px;
+		margin: 10px;
+		padding: 10px;
+		width: 450px;
+		float: left;
+	}
+
+	.cal{
+		background-color: #EEE;
+		float: left;
+		width: 800px;
+		margin: 10px;
+		padding: 10px;
+	}
+
+	.cal h4{
+		padding: 0px;
+		margin: 0px;
+		border: 0px;
+		font-size: 20px;
+	}
+
+	#date{
+		font-size: 25px;
+		padding: 5px;
+	}
+
+	hr{
+		margin-top:10px;
+		margin-bottom: 10px;
+	}
+
+	</style>
+
+	<script type="text/javascript">
+		
+		var EventsToday = [];
+		var EventsLate = [];
+		var today = new Date();
+		var dateToday = today.getDate();
+		var monthToday = today.getMonth();
+
+		function getCalender(){
+			var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+							  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+			var today = new Date();
+			var date = today.getDate() +' - '+ monthNames[today.getMonth()] +' - '+ today.getFullYear();
+			var date2 = today.getDate() +' - '+ today.getMonth() +' - '+ today.getFullYear();
+			var time = today.getHours() + " : " + today.getMinutes() + " : " + today.getSeconds();
+
+			document.getElementById("date").innerHTML = "<h4 style='font-weight:bold;font-size:30px;color:purple'>" + date + "----" + date2 + "----" + time + "</h4>";
+
+		}
+
+		function FillThisMonth(){
+			var data = []
+			
+			{% for i in events %}
+
+			var loop = []
+			var date = Number({{i[0]}});
+			var month = Number({{i[1]}});
+			var event = "{{ i[2][1:i[2] | length - 1] }}"
+
+			loop.push(date)
+			loop.push(month)
+			loop.push(event)
+
+			data.push(loop)
+
+			{% endfor %}
+
+
+			{% for i in events %}
+				curMonth = Number({{i[1]}});
+
+				if(curMonth == monthToday){
+					document.write("<p><span>{{i[0]}}/{{i[1]}}</span><span2>{{i[2][: i[2] | length() - 1]}}</span2><span3>(" + ({{i[0]}} - dateToday) + ")</span3></p>")
+				}
+
+			{% endfor %}
+
+		}
+
+		function FillLater(){
+			var data = []
+			
+			{% for i in events %}
+
+			var loop = []
+			var date = Number({{i[0]}});
+			var month = Number({{i[1]}});
+			var event = "{{ i[2][1:i[2] | length - 1] }}"
+
+			loop.push(date)
+			loop.push(month)
+			loop.push(event)
+
+			data.push(loop)
+
+			{% endfor %}
+
+			var EventsToday = [];
+			var EventsLate = [];
+			var today = new Date();
+			var dateToday = today.getDate();
+			var monthToday = today.getMonth();
+
+			{% for i in events %}
+				curMonth = Number({{i[1]}});
+
+				if(curMonth > monthToday){
+					document.write("<p><span>{{i[0]}}/{{i[1]}}</span><span2>{{i[2][: i[2] | length() - 1]}}</span2><span3>(" + ({{i[1]}} - monthToday) + " Month/s and "+ (Math.abs({{i[0]}} - dateToday)) + "Day/s" + ")</span3></p>")
+				}
+
+			{% endfor %}
+
+		}
+
+		function displaymsg(msg){
+
+			if(document.getElementById(msg).style.display == "none"){
+				document.getElementById(msg).style.display = "block";
+			}else{
+				document.getElementById(msg).style.display = "none";
+			}
+		}
+
+		function generateCalender(){
+
+			var today = new Date();
+			var s = "<div style='display:inline;'>";
+
+			for(i = 1;i <= 31;i ++)
+			{
+				if(i == today.getDate()){
+					s += String("<p style='display:inline; background-color:red; color:white;padding:5px;' onclick='takedate(" + i + ")'>" + i + "</p>")
+				}
+				else
+					s += String("<p style='display:inline' onclick='takedate(" + i + ")'>" + i + "</p>");
+			}
+			s += "</div>"
+			document.write("<b>" + s + "</b>")
+			// document.write("asdfasdfasdf" + String(today.getDate()));
+		}
+
+		function takedate(i){
+			// document.write(i);
+			document.getElementById('datecal').value = i;
+			document.getElementById('monthcal').value = monthToday;
+			
+		}
+	</script>
+</head>
+
+<body>
+	<div>
+		<div class = "todo" >
+			<div>
+				<form action="/addtask" method="POST">
+					<input type="text" name="newtask" placeholder="Task" style="width: 320px;">
+					<input type = "Submit" style="width: 100px;"></input>
+				</form>
+
+				<div style="overflow-y: scroll; height:250px;">
+					{% for i in imp %}
+
+					<a href = "/del/{{i + "@"}}" style="color: red;text-decoration: none;"><h4 style="font-size: 25px;">{{i}}</h4></a>			
+
+					{% endfor %}
+
+					{% for i in tasks %}
+
+					<a href = "/del/{{i}}" style="text-decoration: none;"><h4>{{i}}</h4></a>
+
+				{% endfor %}
+				</div>
+			</div>	
+
+			<hr>
+
+			<div>
+
+				<form action="/adddiary" method="POST">
+					<input type="text" style="width:80px;" name="tag" placeholder="Tag">
+					<input type="text" style="width:250px;" name="today" placeholder="Today">
+					<input type = "Submit" style="width:95px;" value="send"></input>
+				</form>
+				<div style="overflow-y: scroll; height:180px;">
+					{% for i in range(0,diary | length) %}
+						{% if i % 2 == 0 %}
+							<h5  onclick="displaymsg('hover{{i}}')"> {{diary[i][5:16]}} ------ {{ diary[i + 1][0] }}</h5>
+							<div id = "hover{{i}}" style="display: none;">
+								<h5>{{diary[i + 1][1]}}</h5>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class = "cal">
+			<h4 id = "date"></h4>
+
+			<div>
+				<script type="text/javascript">generateCalender();</script>
+			</div>
+			<script type="text/javascript">getCalender();</script>
+			</br>
+			<div>
+				<form method="POST" action="/addcalevent">
+					<input placeholder="Date" type="number" name="date" id = "datecal" style="margin: 5px; width:80px;">
+					<input placeholder="Month" type="number" name="month"  id = "monthcal" style="margin: 5px; width: 80px;">
+					<input placeholder="Event" type="text" name="event"  id = "eventcal" style="margin: 5px; width: 450px;">
+					<!-- </br> -->
+					<input type="submit" name="submit" style="margin: 5px;">
+				</form>
+			</div>
+			<div>
+				<h3>This Month</h3>
+				<div style="overflow-y: scroll; height:240px;">
+					<script type="text/javascript">FillThisMonth();</script>
+				</div>
+			</div>
+
+			<div>
+				<h3>Late</h3>
+				<p id = "laterData"></p>
+				<div style="overflow-y: scroll; height:150px;">
+					<script type="text/javascript">FillLater();</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
