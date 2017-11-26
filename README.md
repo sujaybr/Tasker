@@ -17,4 +17,4 @@ This is a simple python-Flask Application to create your own local to-do list, D
 
 
 ## Here's a Screenshot of the application with some Trial Data in it
-![alt text](https://github.com/sujaybr/Tasker/blob/master/images/Screenshot%202017-11-26%20at%2019.04.00.png)
+![Screen-Shot](https://github.com/sujaybr/Tasker/blob/master/images/Screenshot%202017-11-26%20at%2019.18.47.png)
