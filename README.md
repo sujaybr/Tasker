@@ -1,5 +1,5 @@
 ## What is This?
-This is a simple python-Flask Application to create your own local to-do list, Diary with tags and a simple Calendar.
+This is a simple single-page python-Flask Application to create your own local to-do list, Diary with tags and a simple Calendar.
 
 
 ## To Run this Application
