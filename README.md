@@ -14,3 +14,7 @@ This is a simple python-Flask Application to create your own local to-do list, D
 - The Dairy view initially shows only the Date, time and tag of the entry, click on the entry to show or hide the entire event
 - Click on the calendar numbers to add calendar date and month directly without having to enter them yourself.
 - The number in '()' of every calender event indicates the number of days left for the event to occur.
+
+
+## Here's a Screenshot of the application with some Trial Data in it
+![alt text](https://github.com/sujaybr/Tasker/blob/master/images/Screenshot%202017-11-26%20at%2019.04.00.png)
